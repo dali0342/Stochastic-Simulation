@@ -1,26 +1,16 @@
-'''
-S′(t) = −β I(t)
-N S(t)
-I′(t) = β I(t)
-N S(t) − γI(t)
-R′(t) = γI(t)
-
-N = Population
-β andelen mottagliga som blir exponerade för smitta per tidsenhet
-γ andelen sjuka som tillfrisknar per tidsenhet
-
-S(t) + I(t) + R(t) = N 
-
-1000 = N
-I = 5
-beta = 0,3
-gamma = 1/7
-t0-t120 = tspan
-
-'''
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.integrate import solve_ivp
+
+N = 1000 # size of population
+
+I = 5 # number of infected individuals (at t0)
+S = N-I # number of susceptible individuals (at t0)
+R = 0 # number of recovered individuals
+
+alpha = 0 
+beta = 0.3 # proportion of susceptible individuals exposed to infection per unit of time
+gamma = 1/7 # proportion of sick individuals recovering per unit of time
 
 def ode(t, y):
     S,I,R = y
@@ -30,26 +20,22 @@ def ode(t, y):
     return np.array([dSdt, dIdt, dRdt])
     
 
-N = 1000
-S = 995
-I = 5
-R = 0
-alpha = 0 
-beta = 0.3
-gamma = 1/7
 h = 501
-t0 = 0
-t120 = 120
-tspan = [t0, t120]
-tt = np.linspace(t0, t120, h)
+t_start = 0
+t_end = 120
+tspan = [t_start, t_end]
+tt = np.linspace(t_start, t_end, h)
 
 y0 = np.array([S,I,R])
 
 solve = solve_ivp(fun = ode, t_span = tspan, y0 = y0, t_eval=tt)
 
-plt.plot(solve.t, solve.y[0])
-plt.plot(solve.t, solve.y[1])
-plt.plot(solve.t, solve.y[2])
-plt.title('SIR - Model')
+plt.plot(solve.t, solve.y[0], label='Susceptible (S)')
+plt.plot(solve.t, solve.y[1], label='Infected (I)')
+plt.plot(solve.t, solve.y[2], label='Recovered (R)')
+plt.legend()
+plt.title('SIR-model, deterministic')
+plt.xlabel('Time')
+plt.ylabel('Number of Individuals')
 
 plt.show()
