@@ -16,9 +16,9 @@ gamma = 1/7 # proportion of sick individuals recovering per unit of time
 # stoichiometric matrix
 def sto():
     return np.array([
-        [-1,1,0,0], 
-        [0,-1,1,0], 
-        [0,0,-1,1]
+        [-1,  1,  0,  0], 
+        [ 0, -1,  1,  0], 
+        [ 0,  0, -1,  1]
         ])
 
 # propensity function

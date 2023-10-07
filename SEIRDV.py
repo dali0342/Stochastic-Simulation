@@ -21,12 +21,12 @@ phi = 0.0001 # proportion of vaccinated individuals transitioning to being susce
 # stoichiometric matrix
 def sto():
     return np.array([
-        [-1,1,0,0,0,0], 
-        [0,-1,1,0,0,0], 
-        [0,0,-1,1,0,0],
-        [0,0,-1,0,1,0],
-        [-1,0,0,0,0,1],
-        [1,0,0,0,0,-1]
+        [ -1,  1,  0,  0,  0,  0], 
+        [  0, -1,  1,  0,  0,  0], 
+        [  0,  0, -1,  1,  0,  0],
+        [  0,  0, -1,  0,  1,  0],
+        [ -1,  0,  0,  0,  0,  1],
+        [  1,  0,  0,  0,  0, -1]
         ])
 
 # propensity function

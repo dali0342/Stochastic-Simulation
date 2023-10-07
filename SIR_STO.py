@@ -9,7 +9,6 @@ I = 5 # number of infected individuals (at t0)
 S = N-I # number of susceptible individuals (at t0)
 R = 0 # number of recovered individuals
 
-alpha = 0 
 beta = 0.3 # proportion of susceptible individuals exposed to infection per unit of time
 gamma = 1/7 # proportion of sick individuals recovering per unit of time
 
@@ -23,8 +22,8 @@ def ode(t, y): # only used when wanting to plot deterministic
 # stoichiometric matrix
 def sto():
     return np.array([
-        [-1, 1, 0], 
-        [0, -1, 1]
+        [ -1,  1,  0], 
+        [  0, -1,  1]
         ])
 
 # propensity function

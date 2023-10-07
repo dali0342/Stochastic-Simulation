@@ -18,10 +18,10 @@ mu = alpha * gamma # proportion of sick individuals dying per unit of time (mort
 # stoichiometric matrix
 def sto():
     return np.array([
-        [-1,1,0,0,0], 
-        [0,-1,1,0,0], 
-        [0,0,-1,1,0],
-        [0,0,-1,0,1]
+        [ -1,  1,  0,  0,  0], 
+        [  0, -1,  1,  0,  0], 
+        [  0,  0, -1,  1,  0],
+        [  0,  0, -1,  0,  1]
         ])
 
 # propensity function
