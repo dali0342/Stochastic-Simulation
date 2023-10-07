@@ -75,8 +75,8 @@ plt.plot(solve.t, solve.y[1])
 plt.plot(solve.t, solve.y[2])
 '''
 plt.plot(tvec, Xarr[:, 0], label='Susceptible (S)')
-plt.plot(tvec, Xarr[:, 1], label='Infected (I)')
-plt.plot(tvec, Xarr[:, 2], label='Recovered (R)')
+plt.plot(tvec, Xarr[:, 1], label='Infected       (I)')
+plt.plot(tvec, Xarr[:, 2], label='Recovered   (R)')
 
 plt.legend()
 

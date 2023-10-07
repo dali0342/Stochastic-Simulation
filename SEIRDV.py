@@ -56,11 +56,11 @@ tspan = [t0, t120]
 tvec, Xarr = gillespie.SSA(pro, sto, [S, E, I, R, D, V], tspan, [beta, alpha, gamma, mu, v, phi])
 
 plt.plot(tvec, Xarr[:, 0], label='Susceptible (S)')
-plt.plot(tvec, Xarr[:, 1], label='Exposed (E)')
-plt.plot(tvec, Xarr[:, 2], label='Infected (I)')
-plt.plot(tvec, Xarr[:, 3], label='Recovered (R)')
-plt.plot(tvec, Xarr[:, 4], label='Dead (D)')
-plt.plot(tvec, Xarr[:, 5], label='Vaccinated (V)')
+plt.plot(tvec, Xarr[:, 1], label='Exposed      (E)')
+plt.plot(tvec, Xarr[:, 2], label='Infected       (I)')
+plt.plot(tvec, Xarr[:, 3], label='Recovered   (R)')
+plt.plot(tvec, Xarr[:, 4], label='Dead           (D)')
+plt.plot(tvec, Xarr[:, 5], label='Vaccinated  (V)')
 
 plt.legend()
 plt.title('SEIRDV-model')

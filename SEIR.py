@@ -4,9 +4,9 @@ import gillespie
 
 N = 1000 # size of population
 
-E = 2 # number of exposed individuals (at t0)
-I = 5 # number of infected individuals (at t0)
-R = 0 # number of recovered individuals
+E = 2     # number of exposed individuals (at t0)
+I = 5     # number of infected individuals (at t0)
+R = 0     # number of recovered individuals
 S = N-E-I # number of susceptible individuals (at t0)
 
 alpha = 1/5.5 # incubation time 
@@ -42,9 +42,9 @@ tspan = [t0, t120]
 tvec, Xarr = gillespie.SSA(pro, sto, [S, E, I, R], tspan, [beta, alpha, gamma])
 
 plt.plot(tvec, Xarr[:, 0], label='Susceptible (S)')
-plt.plot(tvec, Xarr[:, 1], label='Exposed (E)')
-plt.plot(tvec, Xarr[:, 2], label='Infected (I)')
-plt.plot(tvec, Xarr[:, 3], label='Recovered (R)')
+plt.plot(tvec, Xarr[:, 1], label='Exposed      (E)')
+plt.plot(tvec, Xarr[:, 2], label='Infected       (I)')
+plt.plot(tvec, Xarr[:, 3], label='Recovered   (R)')
 
 plt.legend()
 plt.title('SEIR-model')
