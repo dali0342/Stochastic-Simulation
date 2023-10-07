@@ -53,7 +53,7 @@ plt.plot(tvec, Xarr[:, 3], label='Recovered (R)')
 plt.plot(tvec, Xarr[:, 4], label='Dead (D)')
 
 plt.legend()
-plt.title('SIERD-model')
+plt.title('SEIRD-model')
 plt.xlabel('Time')
 plt.ylabel('Number of Individuals')
 

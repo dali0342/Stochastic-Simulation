@@ -63,7 +63,7 @@ plt.plot(tvec, Xarr[:, 4], label='Dead (D)')
 plt.plot(tvec, Xarr[:, 5], label='Vaccinated (V)')
 
 plt.legend()
-plt.title('SIERDV-model')
+plt.title('SEIRDV-model')
 plt.xlabel('Time')
 plt.ylabel('Number of Individuals')
 

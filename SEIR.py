@@ -47,7 +47,7 @@ plt.plot(tvec, Xarr[:, 2], label='Infected (I)')
 plt.plot(tvec, Xarr[:, 3], label='Recovered (R)')
 
 plt.legend()
-plt.title('SIER-model')
+plt.title('SEIR-model')
 plt.xlabel('Time')
 plt.ylabel('Number of Individuals')
 
