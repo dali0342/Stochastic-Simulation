@@ -34,12 +34,6 @@ t_start = 0
 t_end = 120
 tspan = [t_start, t_end]
 
-tvec, Xarr = gillespie.SSA(pro, sto, [S, I, R], tspan, [beta, gamma])
-
-plt.plot(tvec, Xarr[:, 0])
-plt.plot(tvec, Xarr[:, 1])
-plt.plot(tvec, Xarr[:, 2])
-
 num_simulations = 15
 
 for i in range(num_simulations):
