@@ -39,15 +39,24 @@ t0 = 0
 t120 = 120
 tspan = [t0, t120]
 
-tvec, Xarr = gillespie.SSA(pro, sto, [S, E, I, R], tspan, [beta, alpha, gamma])
+num_simulations = 15
 
-plt.plot(tvec, Xarr[:, 0], label='Susceptible (S)')
-plt.plot(tvec, Xarr[:, 1], label='Exposed      (E)')
-plt.plot(tvec, Xarr[:, 2], label='Infected       (I)')
-plt.plot(tvec, Xarr[:, 3], label='Recovered   (R)')
+for i in range(num_simulations):
+    tvec, Xarr = gillespie.SSA(pro, sto, [S, E, I, R], tspan, [beta, alpha, gamma])
 
-plt.legend()
-plt.title('SEIR-model')
+    plt.plot(tvec, Xarr[:, 0], label='S: Susceptible', color='tab:blue')
+    plt.plot(tvec, Xarr[:, 1], label='E: Exposed', color='tab:purple')
+    plt.plot(tvec, Xarr[:, 2], label='I: Infected', color='tab:orange')
+    plt.plot(tvec, Xarr[:, 3], label='R: Recovered', color='tab:green')
+    i = 1 + i
+
+# Only display 4 labels
+handles, labels = plt.gca().get_legend_handles_labels()
+by_label = dict(zip(labels, handles))
+plt.legend(by_label.values(), by_label.keys())
+
+plt.suptitle('SEIR-model', fontsize=16)
+plt.title('Incubation time = {} days'.format(1/alpha))
 plt.xlabel('Time')
 plt.ylabel('Number of Individuals')
 
