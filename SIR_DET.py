@@ -30,9 +30,9 @@ y0 = np.array([S,I,R])
 
 solve = solve_ivp(fun = ode, t_span = tspan, y0 = y0, t_eval=tt)
 
-plt.plot(solve.t, solve.y[0], label='Susceptible (S)')
-plt.plot(solve.t, solve.y[1], label='Infected       (I)')
-plt.plot(solve.t, solve.y[2], label='Recovered   (R)')
+plt.plot(solve.t, solve.y[0], label='S: Susceptible')
+plt.plot(solve.t, solve.y[1], label='I: Infected')
+plt.plot(solve.t, solve.y[2], label='R: Recovered')
 plt.legend()
 plt.title('SIR-model, deterministic')
 plt.xlabel('Time')

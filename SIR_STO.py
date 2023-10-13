@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import gillespie
-from scipy.integrate import solve_ivp
 
 N = 1000 # size of population
 
@@ -11,13 +10,6 @@ R = 0 # number of recovered individuals
 
 beta = 0.3 # proportion of susceptible individuals exposed to infection per unit of time
 gamma = 1/7 # proportion of sick individuals recovering per unit of time
-
-def ode(t, y): # only used when wanting to plot deterministic
-    S,I,R = y
-    dSdt = (-1 * beta) * (I/N) * S
-    dIdt = beta * (I/N) * S - (gamma * I)
-    dRdt = gamma * I 
-    return np.array([dSdt, dIdt, dRdt])
 
 # stoichiometric matrix
 def sto():
@@ -38,14 +30,9 @@ def pro(values, coeff):
         propensity_recovered
         ])
 
-
 t_start = 0
 t_end = 120
 tspan = [t_start, t_end]
-
-h = 501 # only used when wanting to plot deterministic
-tt = np.linspace(t_start, t_end, h) # only used when wanting to plot deterministic
-
 
 tvec, Xarr = gillespie.SSA(pro, sto, [S, I, R], tspan, [beta, gamma])
 
@@ -53,32 +40,20 @@ plt.plot(tvec, Xarr[:, 0])
 plt.plot(tvec, Xarr[:, 1])
 plt.plot(tvec, Xarr[:, 2])
 
-'''
-# 15 Stochastic soloution 
-i = 0
-while (i < 15):
+num_simulations = 15
+
+for i in range(num_simulations):
     tvec, Xarr = gillespie.SSA(pro, sto, [S, I, R], tspan, [beta, gamma])
 
-    plt.plot(tvec, Xarr[:, 0])
-    plt.plot(tvec, Xarr[:, 1])
-    plt.plot(tvec, Xarr[:, 2])
+    plt.plot(tvec, Xarr[:, 0], label='S: Susceptible', color='tab:blue')
+    plt.plot(tvec, Xarr[:, 1], label='I: Infected', color='tab:orange')
+    plt.plot(tvec, Xarr[:, 2], label='R: Recovered', color='tab:green')
     i = 1 + i
-'''
 
-
-'''
-# DETERMINISTIC SOLOUTION FOR REFRENCE
-y0 = np.array([S,I,R])
-solve = solve_ivp(fun = ode, t_span = tspan, y0 = y0, t_eval=tt)
-plt.plot(solve.t, solve.y[0])
-plt.plot(solve.t, solve.y[1])
-plt.plot(solve.t, solve.y[2])
-'''
-plt.plot(tvec, Xarr[:, 0], label='Susceptible (S)')
-plt.plot(tvec, Xarr[:, 1], label='Infected       (I)')
-plt.plot(tvec, Xarr[:, 2], label='Recovered   (R)')
-
-plt.legend()
+# Only display 3 labels
+handles, labels = plt.gca().get_legend_handles_labels()
+by_label = dict(zip(labels, handles))
+plt.legend(by_label.values(), by_label.keys())
 
 plt.xlabel('Time')
 plt.ylabel('Number of Individuals')

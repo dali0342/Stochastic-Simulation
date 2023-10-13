@@ -33,6 +33,4 @@ def SSA(prop,stoch,X0,tspan,coeff):
         else:
             print('Simulation ended at t=', t)
             return tvec, Xarr
-            
-            
     return tvec, Xarr
