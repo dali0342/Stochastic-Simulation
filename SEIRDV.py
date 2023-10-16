@@ -11,12 +11,11 @@ D = 0 # number of dead individuals (at t0)
 V = 0 # number of vaccinated individuals (at t0)
 S = N-E-I # number of susceptible individuals (at t0)
 
-alpha = 1/5.5 # incubation time 
-beta = 0.3 # proportion of susceptible individuals exposed to infection per unit of time
-gamma = 1/7 # proportion of sick individuals recovering per unit of time
-mu = 0.034 # proportion of sick individuals dying per unit of time (mortality rate)
-v = 0.80 # rate of vaccination
-phi = 0.0001 # proportion of vaccinated individuals transitioning to being susceptible per unit of time
+alpha = 1/5.5   # incubation time 
+beta = 0.3      # proportion of susceptible individuals exposed to infection per unit of time
+gamma = 1/0     # proportion of sick individuals recovering per unit of time
+mu = 0.034      # proportion of sick individuals dying per unit of time (mortality rate)
+v = 3        # number of people vaccinated per unit of time of vaccination
 
 # stoichiometric matrix
 def sto():
@@ -26,27 +25,24 @@ def sto():
         [0,0,-1,1,0,0],
         [0,0,-1,0,1,0],
         [-1,0,0,0,0,1]
-        #[1,0,0,0,0,-1]
         ])
 
 # propensity function
 def pro(values, coeff):
     S, E, I, R, D, V = values
-    beta, alpha, gamma, mu , v, phi = coeff
-    propensity_exposed = beta * S * (I/N)
+    beta, alpha, gamma, mu , v = coeff
+    propensity_exposed = beta * S * (I/N) if S > 0 else 0 
     propensity_infected = alpha * E
     propensity_recovered = gamma * I
     propensity_dead = mu * I
-    propensity_vaccinated = v
-    #propensity_vaccinated_to_susceptible = phi * V
+    propensity_vaccinated = v if S > 0 else 0 
     
     return np.array([
         propensity_exposed, 
         propensity_infected, 
         propensity_recovered, 
         propensity_dead,
-        propensity_vaccinated,
-        #propensity_vaccinated_to_susceptible
+        propensity_vaccinated
         ])
 
 t0 = 0
@@ -56,7 +52,7 @@ tspan = [t0, t120]
 num_simulations = 15
 
 for i in range(num_simulations):
-    tvec, Xarr = gillespie.SSA(pro, sto, [S, E, I, R, D, V], tspan, [beta, alpha, gamma, mu, v, phi])
+    tvec, Xarr = gillespie.SSA(pro, sto, [S, E, I, R, D, V], tspan, [beta, alpha, gamma, mu, v])
     plt.plot(tvec, Xarr[:, 0], label='S: Susceptible', color='tab:blue')
     plt.plot(tvec, Xarr[:, 1], label='E: Exposed', color='tab:purple')
     plt.plot(tvec, Xarr[:, 2], label='I: Infected', color='tab:orange')
@@ -71,7 +67,7 @@ by_label = dict(zip(labels, handles))
 plt.legend(by_label.values(), by_label.keys())
 
 plt.suptitle('SEIRDV-model', fontsize=16)
-plt.title('Vaccination rate = {}'.format(round(v*100,2)))
+plt.title('Vaccination rate = {} people per day'.format(v))
 
 
 plt.xlabel('Time')

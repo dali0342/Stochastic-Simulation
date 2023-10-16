@@ -13,7 +13,7 @@ S = N-E-I # number of susceptible individuals (at t0)
 alpha = 1/5.5      # incubation time 
 beta = 0.3         # proportion of susceptible individuals exposed to infection per unit of time
 gamma = 1/7        # proportion of sick individuals recovering per unit of time
-mu = 0.034          # proportion of sick individuals dying per unit of time (mortality rate)
+mu = 0.02          # proportion of sick individuals dying per unit of time (mortality rate)
 
 # stoichiometric matrix
 def sto():

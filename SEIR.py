@@ -9,7 +9,7 @@ I = 5     # number of infected individuals (at t0)
 R = 0     # number of recovered individuals
 S = N-E-I # number of susceptible individuals (at t0)
 
-alpha = 1/5.5 # incubation time 
+alpha = 1/5.6 # incubation time 
 beta = 0.3 # proportion of susceptible individuals exposed to infection per unit of time
 gamma = 1/7 # proportion of sick individuals recovering per unit of time
 
